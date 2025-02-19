@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root
+{
+    --main-color:#0aad0a;
+    --light-color:#f0f3f2;
+    --shadow: 1px 1px 10px #4fa74f;
+    --font-family:'Encode Sans Expanded', sans-serif;
+    --rating-color:#ffc908;
+}
+
+.product:hover
+{
+    box-shadow: var(--shadow);
+    
+}
+.product .btn 
+{
+    transition: transform 0.5s , opacity 0.5s;
+    transform: translateY(100%);
+    opacity: 0;
+    background:var(--main-color);
+}
+.product:hover .btn 
+{
+    opacity: 1;
+    transform: translateY(0%);
+
+}
+
+body{
+
+  font-family:'Encode Sans Expanded', sans-serif;
+  background-image: url('./assets/light-patten.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  
+}
+
+.active{
+
+  color: rgb(15, 164, 15);
+  transform: scale(1.1);
+  
+}
