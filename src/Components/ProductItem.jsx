@@ -82,8 +82,8 @@ export default function ProductItem({prod ,flag,refetch}) {
 
     
     return (
-        <div className=' xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2'>
-       <div className="px-4 py-5 w-full h-full ">
+        <div className='xl:w-1/5 lg:w-1/4 md:w-1/3  sm:w-1/2 w-full    '>
+       <div className="px-4 py-5 w-full h-full">
        <div className="h-full p-2 flex flex-col justify-between gap-3 overflow-hidden product bg-white transition-all rounded-lg ">
        <Link to = {'/productdetails'} state={{id,catId:category._id}}>
             <div className='mb-2 px-2'>

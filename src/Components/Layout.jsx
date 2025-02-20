@@ -9,10 +9,8 @@ export default function Layout() {
   return (
     <>
     <Helmet>
-       <meta charSet="utf-8" />
        <title>Fresh Cart</title>
        <link rel="shortcut icon" href={logo} type="image/x-icon" />
-       <meta name="description" content="Shop fresh groceries, fruits, vegetables, and daily essentials online with Fresh Cart. Enjoy fast delivery, affordable prices, and a seamless shopping experience. Freshness guaranteed!" />
     </Helmet>
     <Navbar/>
     <div className='pt-20'>
