@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import ProductItem from './ProductItem';
 import Loading from './Loading';
 import ErrorMsg from './ErrorMsg';
@@ -73,7 +73,7 @@ export default function Productdetails() {
 
 
 
-    if (productLoading || relatedProductsLoading) {
+    if (productLoading || relatedProductsLoading ||wishlistIsLoading) {
 
         return <Loading />
 

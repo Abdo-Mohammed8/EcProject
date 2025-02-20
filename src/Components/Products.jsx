@@ -1,29 +1,23 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import ProductItem from './ProductItem';
 import Loading from './Loading';
 import ErrorMsg from './ErrorMsg';
-import { useQuery } from '@tanstack/react-query';
+
 import useProducts from '../hooks/useProducts';
 import useWishlist, { getWishlist } from '../hooks/useWishlist';
-import Wishlist from './Wishlist';
-import { userToken } from '../Context/UserToken';
 
 
 export default function Products() {
 
-  let { isLogin } = useContext(userToken);
+
 
   let [products , setProducts] = useState([]);
 
-   let {isError,data,error,isLoading,refetch:refetchProd } = useProducts()
+  let {isError,data,error,isLoading} = useProducts()
 
-  // let { isLoading:wishlistIsLoading} = useWishlist(getWishlist)
-
-  // function search(product) {
-    //  > 0 
-  // }
-  let {data:wishlsitAdded,refetch ,isFetching,isSuccess, isLoading:wishlistIsLoading} = useWishlist(getWishlist)
+ 
+  let {data:wishlsitAdded,refetch , isLoading:wishlistIsLoading} = useWishlist(getWishlist)
 
   
 
@@ -38,11 +32,11 @@ useEffect(()=>{
 },[data ])
 
 
-if (isLoading) {
+if (isLoading || wishlistIsLoading) {
   return <Loading />
 }
 if (isError) {
-  console.log(error?.message);
+
   return <ErrorMsg error={error?.message} />
 }
 

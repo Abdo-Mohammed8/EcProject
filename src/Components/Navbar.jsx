@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import logo from './../assets/freshcart-logo.svg'
-import { NavLink, data, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { userToken } from '../Context/UserToken';
 import useCart, { getCart } from '../hooks/useCart';
 
@@ -19,8 +19,6 @@ export default function Navbar() {
 
 
  
-
-  console.log();
   function handleLogout() {
     localStorage.removeItem('userToken');
     setLogin(null);

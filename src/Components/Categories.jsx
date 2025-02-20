@@ -1,21 +1,13 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useCategories from '../hooks/useCategories'
 import Loading from './Loading'
-import useSubCategories from '../hooks/useSubCategories'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+
 import { Link, Outlet } from 'react-router-dom'
 
 export default function Categories() {
 
-  let [subCat,setSubCat] = useState('')
 
-if (!subCat === '') {
-
-   
-
-}
 
 
 
@@ -38,7 +30,7 @@ if (!subCat === '') {
       </div>
       <div className='flex flex-wrap'>
        {
-        categories?.map((category, index) => 
+        categories?.map((category) => 
         <Link to ="subcategories" state={{catId:category._id ,catName:category?.name}}  key={category?._id} className='w-full md:w-1/2 lg:w-1/3 px-5 py-8 '>
         <div className='bg-white  h-full overflow-hidden border border-gray-200 hover:border-green-color/80 rounded-lg product transition-all hover:scale-105'>
           <img className=' w-full h-[350px] object-cover' src={category?.image} alt={category?.name} />

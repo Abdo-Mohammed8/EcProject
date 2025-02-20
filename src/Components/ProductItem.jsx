@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import useMutationCart, { addToCart } from '../hooks/useMutationCart';
 import toast from 'react-hot-toast';
 import { addToWishlist, deleteFromWishlist } from '../hooks/useMutationWishlist';
-import useWishlist, { getWishlist } from '../hooks/useWishlist';
+
 
 export default function ProductItem({prod ,flag,refetch}) {
 
     
-
     let {id, imageCover,title, category, priceAfterDiscount ,price ,ratingsAverage ,brand} = prod;
 
 
@@ -21,8 +20,6 @@ export default function ProductItem({prod ,flag,refetch}) {
 
     
 
-    // let flag = wishlsitAdded?.data?.map(ele=>ele?.id)?.filter(ele=>ele === id)?.length > 0 ? true : false;
-  
     function handelWishlsit(id) {
         if (flag) {
             deleteFormWhishlist(id);

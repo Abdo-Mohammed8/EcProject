@@ -24,9 +24,6 @@ export default function Wishlist() {
     setcurrunt(e.currentTarget.getAttribute("index"))
   }
 
-  // console.log(data?.data?.count);
-
-  // console.log(delet?.data?.message);
   useEffect(() => {
 
     if (deleteSuccess&&isFetching) {

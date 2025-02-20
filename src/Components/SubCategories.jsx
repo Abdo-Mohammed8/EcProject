@@ -2,21 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Loading from './Loading';
 
-export default function SubCategories({cat}) {
+
+export default function SubCategories() {
 
     let {state} = useLocation();
     
 
-    console.log(state?.catId);
     function getSubCategories() {
 
         return axios.get(`https://ecommerce.routemisr.com/api/v1/categories/${state?.catId}/subcategories`)
       
       }
       
-      let{data:sub , isLoading:subLoading ,isError:subIsError,error:subError,refetch} = useQuery({
+      let{data:sub , isLoading:subLoading } = useQuery({
         queryKey: ['subCategories',state?.catId],
         queryFn:getSubCategories,
         select:(data)=>data?.data,

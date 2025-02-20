@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
-import React from 'react'
 
 export function addToWishlist (productId) {
 
@@ -22,9 +21,7 @@ export default function useMutationWishlist(fn) {
   const queryClient = useQueryClient()
   return useMutation({ mutationFn:fn,
     onSuccess:()=>{
-      queryClient.invalidateQueries({ queryKey: ['wishlist']});
-      // queryClient.invalidateQueries({ queryKey: ['products']});
-    
+      queryClient.invalidateQueries({ queryKey: ['wishlist']});    
     }
     
 })

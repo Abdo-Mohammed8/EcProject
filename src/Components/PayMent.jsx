@@ -1,26 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import useMutationCart, { paymentCash, paymentOnline } from '../hooks/useMutationCart';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import * as motion from "motion/react-client"
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function PayMent({cartId ,flag}) {
 
   let navigate = useNavigate()
-    let {data:online , mutate:paymentOnlineMutate ,isPending:onlinePending} = useMutationCart(paymentOnline);
+    let {data:online,isSuccess:onlineSuccess , mutate:paymentOnlineMutate ,isPending:onlinePending} = useMutationCart(paymentOnline);
 
-    let {data:cash , mutate:paymentCashMutate ,isSuccess:paymentSuccess ,isPending:cashPending} = useMutationCart(paymentCash);
+    let { mutate:paymentCashMutate , reset:cashReset ,isSuccess:paymentSuccess ,isPending:cashPending} = useMutationCart(paymentCash);
 
-    if (paymentSuccess){
+    
 
-      navigate('/allorders')
-    }
+   
       
-      if (online?.data?.status ==='success') {
-        window.location.href= online?.data?.session?.url
-      }
+    
 
-      console.log(cash?.data);
+ let validationSchema = Yup.object().shape({
+
+   details:Yup.string().min(4,'Details is too short').required('Details of your address is required'),
+   phone:Yup.string().matches(/^(\+(?=2))?2?01(?![3-4])[0-5]{1}[0-9]{8}$/,'Phone number is invalid, accept only egypt phone numbers').required('Phone number is required'),
+   city:Yup.string().min(3,'City is too short').required('City is required'),
+  });
 
 
 
@@ -32,6 +36,7 @@ export default function PayMent({cartId ,flag}) {
       
           city: ''
         },
+        validationSchema: validationSchema,
       
          onSubmit:()=>paymentOnlineMutate({cartId, shippingAddress:formikOnline.values})
        
@@ -45,11 +50,26 @@ export default function PayMent({cartId ,flag}) {
       
           city: ''
         },
+        validationSchema: validationSchema,
       
          onSubmit:()=>paymentCashMutate({cartId, shippingAddress:formikCash.values})
        
          
       })
+
+      useEffect(()=>{
+        if (paymentSuccess){
+          toast.success('The cash order was completed successfully')
+          cashReset()
+          navigate('/allorders')
+          
+         
+        }
+        if (onlineSuccess) {
+          toast.success('The order was completed successfully')
+          window.location.href= online?.data?.session?.url
+        }
+      },[paymentSuccess,onlineSuccess])
       
   return (
    <>
@@ -73,6 +93,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikOnline.errors.details && formikOnline.touched.details ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikOnline.errors.details}</span>
+           </div>:''}
     <div className="mb-5">
       <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Your Phone number</label>
       <input 
@@ -85,6 +109,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikOnline.errors.phone && formikOnline.touched.phone ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikOnline.errors.phone}</span>
+           </div>:''}
     <div className="mb-5">
       <label htmlFor="city" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Your City</label>
       <input 
@@ -96,6 +124,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikOnline.errors.city && formikOnline.touched.city ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikOnline.errors.city}</span>
+           </div>:''}
     <div>
 
 
@@ -128,6 +160,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikCash.errors.details && formikCash.touched.details ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikCash.errors.details}</span>
+           </div>:''}
     <div className="mb-5">
       <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Your Phone number</label>
       <input 
@@ -140,6 +176,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikCash.errors.phone && formikCash.touched.phone ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikCash.errors.phone}</span>
+           </div>:''}
     <div className="mb-5">
       <label htmlFor="city" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Your City</label>
       <input 
@@ -151,6 +191,10 @@ export default function PayMent({cartId ,flag}) {
 
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-color focus:border-grring-green-color block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-color dark:focus:border-grring-green-color" required placeholder="" />
     </div>
+    {formikCash.errors.city && formikCash.touched.city ?
+          <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+           <span className="font-medium">{formikCash.errors.city}</span>
+           </div>:''}
     <div>
 
 

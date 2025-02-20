@@ -1,6 +1,5 @@
 
 import React from 'react'
-
 import Loading from './Loading'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'

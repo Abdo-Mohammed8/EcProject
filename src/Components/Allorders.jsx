@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from 'react'
-import useCart, { getCart } from '../hooks/useCart'
+import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Loading from './Loading';
 import ErrorMsg from './ErrorMsg';
-import { data } from 'react-router-dom';
 import useToken from '../hooks/useToken';
 
 export default function Allorders() {

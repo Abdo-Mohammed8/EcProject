@@ -9,7 +9,6 @@ import toast from 'react-hot-toast';
 export default function ResetPassword() {
 
   let navigate = useNavigate();
-  // let [loading,setLoading] = useState(false);
   let [toggle,setToggle] = useState(false);
   let [ToNewpassowrd,setToNewpassword] = useState(false);
 
@@ -23,8 +22,7 @@ export default function ResetPassword() {
   })
 
  
-  //  console.log(data?.data);
-  //  console.log(resetError?.response?.data?.message);
+
   
   function handelReset(values) {
 
@@ -47,8 +45,7 @@ export default function ResetPassword() {
   console.log(ResetPassword);
   console.log(ResetPasswordError);
  
-  //  console.log(code);
-    // console.log(codeError);
+
   
   function handelCode(values) {
 

@@ -141,7 +141,7 @@ export default function Register() {
            <span className="font-medium">{formik.errors.phone}</span>
            </div>:''}
            
-          <button  type="submit" className={formik.isValid ?'text-white  bg-green-color hover:bg-green-color/75  focus:outline-none  font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-border-green-color dark:hover:bg-green-color dark:focus:ring-green-color':'text-white bg-green-color/60   focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  cursor-not-allowed'}>
+          <button  type="submit" className={formik.isValid?'text-white  bg-green-color hover:bg-green-color/75  focus:outline-none  font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-border-green-color dark:hover:bg-green-color dark:focus:ring-green-color':'text-white bg-green-color/60   focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  cursor-not-allowed'}>
             {loading?<i className="fa-solid fa-spinner animate-spin text-white"></i>:'Register'}</button>
         </form>
       </div>
