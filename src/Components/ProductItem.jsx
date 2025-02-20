@@ -16,9 +16,13 @@ export default function ProductItem({prod ,flag,refetch}) {
 
     let {data:wishlist,isPending:wishlistIsPending,isSuccess:wishlistIsSuccess,error:errorwishlist,isError:wishlistIsError, mutate:mutateWishlist , reset:addToWishlistReset} = useMutationCart(addToWishlist)
 
-    let{mutate:deleteFormWhishlist,isPending:deleteIsPending ,isSuccess:deleteSuccess ,data:deleteMsg ,reset:deleteFromWishlistReset } = useMutationCart(deleteFromWishlist)
+    let{mutate:deleteFormWhishlist,isPending:deleteIsPending ,isSuccess:deleteSuccess ,data:deleteMsg ,reset:deleteFromWishlistReset ,isError:deleteIsError,error:deleteError} = useMutationCart(deleteFromWishlist)
 
-    
+    if (!localStorage.getItem('userToken')){
+
+        flag = false;
+
+    }
 
     function handelWishlsit(id) {
         if (flag) {
@@ -57,6 +61,12 @@ export default function ProductItem({prod ,flag,refetch}) {
                  refetch()
 
         }
+        if (deleteIsError){
+                toast.error(deleteError?.response?.data?.message);
+                addToWishlistReset()
+                 refetch()
+
+        }
         if (deleteSuccess) {
             toast.success(deleteMsg?.data?.message);
             deleteFromWishlistReset()
@@ -67,7 +77,7 @@ export default function ProductItem({prod ,flag,refetch}) {
         
 
              
-    },[isSuccess,isError,wishlistIsSuccess,wishlistIsError,deleteSuccess])
+    },[isSuccess,isError,wishlistIsSuccess,wishlistIsError,deleteSuccess,deleteIsError])
    
 
     

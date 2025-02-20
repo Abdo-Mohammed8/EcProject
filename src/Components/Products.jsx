@@ -29,10 +29,11 @@ export default function Products() {
 useEffect(()=>{
   setProducts(data)
 
-},[data ])
+
+},[data ,wishlsitAdded])
 
 
-if (isLoading || wishlistIsLoading) {
+if (isLoading) {
   return <Loading />
 }
 if (isError) {

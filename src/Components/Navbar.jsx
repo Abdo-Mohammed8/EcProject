@@ -22,7 +22,7 @@ export default function Navbar() {
   function handleLogout() {
     localStorage.removeItem('userToken');
     setLogin(null);
-    navigate('/login');
+    navigate('/');
     
 
   }
